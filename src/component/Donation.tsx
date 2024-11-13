@@ -5,7 +5,7 @@ function Donation(props: donation){
     console.log(props)
     return(
         <>
-        <div className="">
+        <div className="mb-12">
         <div className="bg-[#171b26] w-full rounded-lg p-6 md:p-8">
         <div className="w-full flex justify-between">
           <div className="flex items-center gap-3">

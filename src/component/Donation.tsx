@@ -3,6 +3,7 @@ import donation from './donation'
 
 function Donation(props: donation){
     const {id, name, amount, email_address} = props
+    console.log(props)
     return(
         <>
         <div className="">
@@ -52,7 +53,7 @@ function Donation(props: donation){
 
           <div className="">
             <p className="text-3xl text-green-800">
-                ${amount}
+                ${amount.slice(0,-2)}
             </p>
           </div>
 
@@ -63,7 +64,7 @@ function Donation(props: donation){
                 />
             <div className="p-3 flex justify-center">
               <p>
-                {email_address}
+                {id}
               </p>
             </div>
           </div>
@@ -87,9 +88,6 @@ function Donation(props: donation){
           </div> */}
         </div>
       </div>
-            
-            {id}
-            {amount}
         </div>
         </>
     )

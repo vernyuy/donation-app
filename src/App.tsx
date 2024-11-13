@@ -21,7 +21,7 @@ Amplify.configure({
 // const client = generateClient<Schema>();
 
 function App() {
-  const [myEvents, setMyEvents] = useState<unknown[]>([]);
+  const [myEvents, setMyEvents] = useState<any[]>([]);
 
   useEffect(() => {
     let channel: EventsChannel;
@@ -32,7 +32,7 @@ function App() {
       channel.subscribe({
         next: (data: any) => {
           console.log("received", data);
-          setMyEvents((prev) => [data, ...prev]);
+          setMyEvents((prev) => [data]);
         },
         error: (err: any) => console.error("error", err),
       });
@@ -87,15 +87,16 @@ function App() {
               />
             </div>
             <div>
-              {myEvents.map((event: any, index) => (
-                <Donation
+              {myEvents.map((event: any, index) => {
+                console.log(myEvents)
+               return <Donation
                   key={index}
-                  id={event.id}
-                  amount={event.amount}
+                  id={event.event.id}
+                  amount={event.event.amount}
                   email_address={event.email}
                   name={event.name}
                 />
-              ))}
+})}
             </div>
           </div>
         </div>

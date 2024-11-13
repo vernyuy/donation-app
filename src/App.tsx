@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { EventsChannel, events } from "aws-amplify/data";
 import { Amplify } from "aws-amplify";
-import Donation from "./component/donation.tsx";
+import Donation from "./component/Donation.tsx";
 import { Link } from "@aws-amplify/ui-react";
 
 Amplify.configure({

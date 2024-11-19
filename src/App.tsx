@@ -24,6 +24,10 @@ type Events = {
   email: string;
   phone: string | number;
 };
+type DataTypes = {
+  id: string | number;
+  event: Events;
+};
 
 function App() {
   const [myEvents, setMyEvents] = useState<Events[]>([]);
@@ -36,7 +40,7 @@ function App() {
       channel = await events.connect("default/stripe");
 
       channel.subscribe({
-        next: (data: Events) => {
+        next: (data: DataTypes) => {
           console.log("received", data);
           const { event } = data;
           updateState(event);

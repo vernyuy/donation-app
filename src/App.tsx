@@ -20,7 +20,7 @@ type Events = {
   id: string | number;
   name: string;
   color: string;
-  amount: string | number;
+  amount: string;
   email: string;
   phone: string | number;
 };
@@ -66,7 +66,7 @@ function App() {
           id: event?.id,
           email: event?.email,
           name: event?.name,
-          amount: event?.amount,
+          amount: `${Math.round(parseInt(event.amount) / 100)}`,
           phone: event?.phone,
           color: getRandomColor(),
         },

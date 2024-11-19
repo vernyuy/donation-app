@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { EventsChannel, events } from "aws-amplify/data";
 import { Amplify } from "aws-amplify";
 import { Link } from "@aws-amplify/ui-react";
@@ -11,20 +11,23 @@ Amplify.configure({
         "https://la7natkymrg2pauacubuwiw4vi.appsync-api.us-east-1.amazonaws.com/event",
       region: "us-east-1",
       defaultAuthMode: "apiKey",
-      apiKey: "da2-m7el57e7z5axlcwbc5vqvkapeu",
+      apiKey: "da2-6b3vhk4o7jfzpji56zkjgzuqha",
     },
   },
 });
 
 type Events = {
   id: string | number;
+  name: string;
   color: string;
   amount: string | number;
   email: string;
+  phone: string | number;
 };
 
 function App() {
   const [myEvents, setMyEvents] = useState<Events[]>([]);
+  const eventsRef = useRef<Events[]>([]);
 
   useEffect(() => {
     let channel: EventsChannel;
@@ -35,15 +38,8 @@ function App() {
       channel.subscribe({
         next: (data: Events) => {
           console.log("received", data);
-
-          setMyEvents(() => [
-            {
-              id: data?.id,
-              email: data?.email,
-              amount: data?.amount,
-              color: getRandomColor(),
-            },
-          ]);
+          const { event } = data;
+          updateState(event);
         },
         error: (err: unknown) => console.error("error", err),
       });
@@ -53,6 +49,37 @@ function App() {
 
     return () => channel && channel.close();
   }, []);
+
+  function updateState(event: Events) {
+    const index = eventsRef.current.findIndex(
+      (element) => element.id === event?.id
+    );
+
+    if (index == -1) {
+      setMyEvents((prevEvents) => [
+        ...prevEvents,
+        {
+          id: event?.id,
+          email: event?.email,
+          name: event?.name,
+          amount: event?.amount,
+          phone: event?.phone,
+          color: getRandomColor(),
+        },
+      ]);
+      eventsRef.current = [
+        ...eventsRef.current,
+        {
+          id: event?.id,
+          email: event?.email,
+          name: event?.name,
+          amount: event?.amount,
+          phone: event?.phone,
+          color: getRandomColor(),
+        },
+      ];
+    }
+  }
 
   function getRandomColor() {
     const hex = Math.floor(Math.random() * 0xffffff).toString(16);
@@ -219,7 +246,7 @@ function App() {
 
                               <div className="flex">
                                 <p className="font-medium text-gray-100">
-                                  Anonymous Donor
+                                  {event?.name ? event.name : "Anonymous Donor"}
                                 </p>
                                 <span>
                                   <svg
@@ -262,7 +289,12 @@ function App() {
                               </p>
                             </div>
 
-                            <p>Email: {event.email}</p>
+                            <p>
+                              Email:{" "}
+                              {event?.email
+                                ? event?.email
+                                : "anonymous@gmail.com"}
+                            </p>
 
                             <p>
                               🗃️ ⚡ Thank you for your generous support! Your

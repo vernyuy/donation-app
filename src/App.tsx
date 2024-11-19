@@ -66,7 +66,7 @@ function App() {
           id: event?.id,
           email: event?.email,
           name: event?.name,
-          amount: `${Math.round(parseInt(event.amount) / 100)}`,
+          amount: `${Math.round(parseInt(event.amount) / 100)}.00`,
           phone: event?.phone,
           color: getRandomColor(),
         },

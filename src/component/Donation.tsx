@@ -1,11 +1,11 @@
 import donation from "./donation";
 
 function Donation(props: donation) {
-  const { id, name, amount, email_address } = props;
   console.log(props);
   return (
     <>
-      <div className="mb-12">
+      <div></div>
+      {/* <div className="mb-12">
         <div className="bg-[#171b26] w-full rounded-lg p-6 md:p-8">
           <div className="w-full flex justify-between">
             <div className="flex items-center gap-3">
@@ -74,7 +74,7 @@ function Donation(props: donation) {
           </div>
         </div>
         <p className=""></p>
-      </div>
+      </div> */}
     </>
   );
 }

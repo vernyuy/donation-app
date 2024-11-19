@@ -11,7 +11,7 @@ Amplify.configure({
         "https://la7natkymrg2pauacubuwiw4vi.appsync-api.us-east-1.amazonaws.com/event",
       region: "us-east-1",
       defaultAuthMode: "apiKey",
-      apiKey: "da2-m7el57e7z5axlcwbc5vqvkapeu",
+      apiKey: "da2-6b3vhk4o7jfzpji56zkjgzuqha",
     },
   },
 });
@@ -53,7 +53,7 @@ function App() {
           </div>
         </nav>
 
-        <div className="pt-1.5 md:pt-10 px-12 min-h-screen w-screen bg-[#373c48] flex justify-between text-gray-400 overflow-y-auto overflow-x-hidden">
+        <div className="pt-1.5 md:pt-10 px-12 min-h-screen w-screen bg-[#373c48] md:flex justify-between text-gray-400 overflow-y-auto overflow-x-hidden">
           <div className="flex flex-col gap-12 justify-center">
             <div className="flex flex-col">
               <h3 className="text-5xl text-white font-extrabold">
